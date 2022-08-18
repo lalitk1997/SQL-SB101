@@ -1,0 +1,315 @@
+JDBC: Java Database connectivity
+
+Java mostly used to develop the Business application.
+
+--every business organizations provide their business services to the 
+customer, and to computerize those business services offered by a
+business organization , whatever computer application we develop, is known 
+as business application.
+
+Business orgnizations are also of 2 types :
+
+1.small scale business orgnization
+2.Large scale business organization (Enterprise)
+
+Main objective/goal of any business organization is : profit.
+
+
+common and general things required in  a business application :
+
+1. maintaining business data permanently in a secure and easily retriaval manner.
+
+2.processing the business data according to the business rule.
+
+3. presenting the data to end-user in user understandable format.
+
+
+Note: In realtime, the business data will be stored in RDBMS s/w 
+
+ex:
+
+Mysql
+Oracle
+Postgres
+DB2
+Sql-Server
+
+Why Java DB communication is required:
+================================
+
+--Our Java application is very efficient in Processing the data and presenting the data, 
+but it is very poor in storing the data in a secure and easily retrieval manner.
+
+--with the java using Serialization and desirialization process we can store/save business
+data(holded in the objects).
+
+--RDBMS s/w are very much excellent in storing/maintaining the data, but they are very poor in presenting the data and processing the data.
+
+  
+--to develop the robust and powerfull business application,we need to integrate the power 
+of both hetregenious technology.
+
+
+
+--Java application can perform any task through the method calls, objects, these 
+method calls and objects are not understandable by RDBMS s/w directly.
+
+--similarly, DB s/w performs any operations by using SQL, but these sql commands is not understandable by the JVM.
+
+
+---inspite of heteregenious env, we can communicate Java app with the DB s/w using JDBC.
+
+Note: JDBC enables any kind of Java application to communicate with any kind of DB s/w in a standard manner.
+
+
+Russian	             translator		                      Japanese
+Java<--------------  Jdbc driver s/w  ----------------------------->DB s/w
+
+
+JDBC: 
+
+--it is an open specification from sun-microsystem(Oracle), (a documentation 
+which contains rules and guidelines to develop a perticular s/w (JDBC driver s/w))
+
+--DB vendor or any 3rd party vendor will implements this specification and develop the 
+jdbc driver s/w.
+
+
+mysql : oracle
+db2 : IBM      
+sql_server : microsoft
+
+Ratandb: Ratan    : JDBC driver according to the JDBC specification ------------> Java application.
+
+--for each DB s/w, we have diff Jdbc driver s/w. but all driver s/w devloped based on jdbc specification only.
+
+--these driver s/w comes in the form of jar file.
+
+
+mysql : mysql-connector.jar
+oracle : ojdbc6.jar
+postgres: postgres-version.jar
+
+
+
+--this jdbc specification provides a jdbc api, to the programmer/developer to perform the DB operation from the Java application.
+
+--this jdbc api comes in the form of 2 packages:
+
+1.java.sql
+2.javax.sql
+
+--this jdbc api comes along with JDK installation. along with Java core library.
+
+
+--to make our java application to communicate with DB s/w we need to 
+downlaod the jdbc driver s/w jar file and we need to set that jar file to the classpath of our application.
+
+--in the context of Java DB communication, our Java application will act as a client 
+because it needs the services of the DB s/w. so our Java application is also called
+as JDBC client.
+
+responsibility of the JDBC client (Java application):
+========================================
+
+1. requesting the connection from the DB.
+
+2.submitting the appropriate sql statement to the DB server in the form of String 
+object.
+
+3. processing the result comming from the DB s/w.
+
+4. dealing with exceptions if any. (most of jdbc exceptions are the checked exception)
+
+5.managing the transaction whenever it is required.
+
+6.closing the connection once done with DB operation.
+
+
+Jdbc driver :-
+---------------
+
+--it is a translation s/w written in Java according to the JDBC specification.
+
+responsibility of JDBC driver s/w:
+-----------------------------------------
+
+1. establish the connection bt java application and DB s/w.
+
+2.recieving the jdbc method calls from the java application, and translate them 
+into the DB understandable format and forward them to the DB s/w.
+
+3.translate the DB s/w given result to the Java format (some objects) and returns 
+to the JDBC client (to the Java application)
+
+
+Step to connect the Java application with the DB s/w:
+=========================================
+
+step1: download the jdbc driver related jar file and set that jar file in the classpath 
+of our project/application.
+
+
+step 2: load the jdbc driver (loading the jdbc driver related main class into the memory.)
+
+step 3: prepare the connection URL.'
+
+step 4: establish the connection
+
+step 5: after performing the CRUD (insert, select, update, delete)operation close the connection.
+
+
+Note: with the Java application even though we can perform DDL operation , but we should always perform DML, DRL ,TCL type of operations.
+
+Javaapp:
+
+A.java
+B.Java
+C.java
+Demo.java
+
+---after compiling we need to compess all the .class files inside a jar file.
+
+app1.jar
+
+
+
+Myapp1: here we need to set the app1.jar the classpath of Myapp1 application
+
+class X {
+
+A a1= new A();
+
+}
+
+
+adding the jar file to the project class path:
+----------------------------------------------------
+
+rightclick on the project ---->build path ----> configure build path
+-----> select libraries tab----> add external archieve ----->
+select the downloaded jar file ---->apply and close.
+
+
+Connection URL:
+
+String url= "jdbc:mysql://localhost:3306/ratandb";
+
+
+example app:
+
+Demo.java:
+--------------
+
+
+
+package com.masai;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class Demo {
+	
+	public static void main(String[] args) {
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		String url= "jdbc:mysql://localhost:3306/ratandb";
+		
+		try {
+			Connection conn= DriverManager.getConnection(url, "root", "root");
+			
+			if(conn  != null)
+				System.out.println("connected...");
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}				
+		
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
