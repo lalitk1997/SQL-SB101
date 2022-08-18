@@ -1,0 +1,6 @@
+Steps involved in connecting any java-applications are : 
+1. Set SQL-connector at class-path of the project.
+2. Set path of Driver class using Class.forName("path") to load all JAR files.
+3. Create URL like jdbc:mysql://localhost:3306/testdb
+4. Use DriverManager.getConnection(url, admin, password);
+5. Handle all exceptions carefully. 
