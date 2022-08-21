@@ -1,4 +1,3 @@
--- 11:38 - 
 -- Database Normalization
 /*
 PRIMARY KEY
@@ -80,5 +79,7 @@ EmployeeToCity(empNum, deptName, deptCity) PK-> {empNum, deptName, deptCity}
 CityToCountry(deptCity, deptCountry) PK-> {deptCity}
 You Problem :- Ans. 2
 */
+
+
 
 
